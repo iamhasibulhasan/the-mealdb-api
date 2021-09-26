@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The MealDB</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yaldevi:wght@200&display=swap" rel="stylesheet">
+    <!-- Bootstrap files -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body style="font-family: 'Yaldevi', sans-serif;">
+    <h1 class="fw-bold text-danger text-center">The MealDB <sup class="fw-light"
+            style="font-family: 'Dancing Script', cursive;">your
+            desire
+            food</sup></h1>
+
+    <!-- Search Your Food -->
+    <div class="input-group mb-3 w-75 mx-auto mt-5">
+        <input id="search-field" type="text" class="form-control" placeholder="Search your food..."
+            aria-label="Search your food..." aria-describedby="btn-search">
+        <button onclick="searchFood()" class="btn btn-outline-secondary" type="button" id="btn-search">Search</button>
+    </div>
+
+    <!-- Single Meal -->
+    <section class="mx-auto container w-50" id="meal-details">
+
+    </section>
+
+    <!-- Search result -->
+    <section id="foods" class="container my-5">
+        <div id="search-results" class="row row-cols-1 row-cols-md-3 g-4">
+
+        </div>
+    </section>
+
+
+    <!-- JS Files -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/mealdb.js"></script>
+</body>
+
+</html>
