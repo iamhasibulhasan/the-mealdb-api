@@ -1,52 +1,92 @@
+let error = document.getElementById('error-msg');
+let mealDetail = document.getElementById('meal-details');
+
 function searchFood() {
     let searchField = document.getElementById('search-field');
     let searchText = searchField.value;
 
-    searchField.value = "";
 
-    let url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
 
-    // Fetch with API
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayFood(data));
+    if (searchText == '') {
+        let searchResults = document.getElementById('search-results');
+
+        // clear previous value in the result section
+        searchResults.textContent = '';
+        error.innerText = "Please write any meal name.";
+
+    } else {
+        // Load Data
+        let url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
+        // Clear data
+        searchField.value = "";
+        error.innerText = "";
+        // Fetch with API
+        fetch(url)
+            .then(res => res.json())
+            .then(data => displayFood(data));
+    }
+
+
+
+
 }
 
 let displayFood = foods => {
     // console.log(foods);
     let searchResults = document.getElementById('search-results');
 
-    for (const food of foods.meals) {
-        // console.log(food.strMeal);
+    // clear previous value in the result section
+    searchResults.textContent = '';
+    if (foods.meals == null) {
+        error.innerText = "No result found.";
+    } else {
+        // clear previous data
+        mealDetail.textContent = "";
+        error.innerText = "";
+        for (const food of foods.meals) {
+            // console.log(food.strMeal);
 
-        let div = document.createElement('div');
-        div.classList.add('col');
+            let div = document.createElement('div');
+            div.classList.add('col');
 
-        div.innerHTML = `
-            <div onclick="mealDetails(${food.idMeal})" class="card">
-                <img src="${food.strMealThumb}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">${food.strMeal}</h5>
-                    <p class="card-text">${food.strInstructions.slice(0, 200)}</p>
+            div.innerHTML = `
+                <div onclick="mealDetails(${food.idMeal})" class="card">
+                    <img src="${food.strMealThumb}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">${food.strMeal}</h5>
+                        <p class="card-text">${food.strInstructions.slice(0, 200)}</p>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
 
-        searchResults.appendChild(div);
+            searchResults.appendChild(div);
+        }
     }
+
+
 }
 
-function mealDetails(mealId) {
+
+const mealDetails = async mealId => {
     let url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayMeal(data));
+    let res = await fetch(url);
+    let data = await res.json();
+    displayMeal(data);
+    // fetch(url)
+    //     .then(res => res.json())
+    //     .then(data => displayMeal(data));
 }
+
+
+
 
 let displayMeal = meal => {
-    console.log(meal.meals[0]);
+    // console.log(meal.meals[0]);
     let food = (meal.meals[0]);
-    let mealDetail = document.getElementById('meal-details');
+
+
+    // clear previous data
+    mealDetail.textContent = "";
 
     let div = document.createElement('div');
     div.classList.add('card');
