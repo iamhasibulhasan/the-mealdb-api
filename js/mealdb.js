@@ -1,3 +1,14 @@
+// Click Enter Search
+const btnSearch = document.getElementById("btn-search");
+const searchText = document.getElementById("search-field");
+
+searchText.addEventListener("keypress", function (event) {
+    // event.preventDefault();
+    if (event.keyCode == 13)
+        btnSearch.click();
+});
+
+
 let error = document.getElementById('error-msg');
 let mealDetail = document.getElementById('meal-details');
 
